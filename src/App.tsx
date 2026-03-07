@@ -3,12 +3,13 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AppSidebar from "@/components/AppSidebar";
-import DriverDashboard from "@/pages/DriverDashboard";
-import CityInsights from "@/pages/CityInsights";
-import FlashHub from "@/pages/FlashHub";
-import MetricsDashboard from "@/pages/MetricsDashboard";
-import PrivacyControls from "@/pages/PrivacyControls";
+import TopNav from "@/components/TopNav";
+import BottomNav from "@/components/BottomNav";
+import HomePage from "@/pages/HomePage";
+import CityInsightsPage from "@/pages/CityInsightsPage";
+import FlashHubPage from "@/pages/FlashHubPage";
+import ActivityPage from "@/pages/ActivityPage";
+import AccountPage from "@/pages/AccountPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -19,18 +20,17 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <div className="flex min-h-screen">
-          <AppSidebar />
-          <main className="flex-1 overflow-auto">
-            <Routes>
-              <Route path="/" element={<DriverDashboard />} />
-              <Route path="/city-insights" element={<CityInsights />} />
-              <Route path="/flash-hub" element={<FlashHub />} />
-              <Route path="/metrics" element={<MetricsDashboard />} />
-              <Route path="/privacy" element={<PrivacyControls />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </main>
+        <div className="min-h-screen bg-background">
+          <TopNav />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/city-insights" element={<CityInsightsPage />} />
+            <Route path="/flash-hub" element={<FlashHubPage />} />
+            <Route path="/metrics" element={<ActivityPage />} />
+            <Route path="/account" element={<AccountPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <BottomNav />
         </div>
       </BrowserRouter>
     </TooltipProvider>
