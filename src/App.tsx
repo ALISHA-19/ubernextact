@@ -3,7 +3,12 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
+import AppSidebar from "@/components/AppSidebar";
+import DriverDashboard from "@/pages/DriverDashboard";
+import CityInsights from "@/pages/CityInsights";
+import FlashHub from "@/pages/FlashHub";
+import MetricsDashboard from "@/pages/MetricsDashboard";
+import PrivacyControls from "@/pages/PrivacyControls";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -14,11 +19,19 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <div className="flex min-h-screen">
+          <AppSidebar />
+          <main className="flex-1 overflow-auto">
+            <Routes>
+              <Route path="/" element={<DriverDashboard />} />
+              <Route path="/city-insights" element={<CityInsights />} />
+              <Route path="/flash-hub" element={<FlashHub />} />
+              <Route path="/metrics" element={<MetricsDashboard />} />
+              <Route path="/privacy" element={<PrivacyControls />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+        </div>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
